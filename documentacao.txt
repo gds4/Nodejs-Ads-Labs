@@ -1,0 +1,67 @@
+ROTAS DE RESPONSÁVEL =========> /responsavel <===========
+
+
+GET /responsavel : Lista todos os responsáveis cadastrados
+
+
+POST /responsavel : Cria um novo responsável
+{
+    "nome": "João da Silva",
+	"data_nascimento": "2012/11/11"
+}
+- Ambos os atributos são obrigatórios
+
+
+PUT /responsavel/:id : Atualiza os dados de um responsável
+{
+    "nome": "Cláudio Santos",
+    "data_nascimento": "2014/05/02"
+}
+- todos os atributos são modificáveis
+
+
+DELETE /responsavel/:id : Remove um responsável
+
+
+GET /responsavel/sem-pendencia : Lista todos os responsáveis que não possuem pendencias
+
+
+GET /responsavel/:id/tarefas : Lista todas as tarefas de determinado responsável
+
+
+
+ROTAS DE TAREFAS =========> /tarefa <===========
+
+
+
+GET /tarefa : Lista todas as tarefas cadastradas
+
+
+POST /tarefa : Cria uma nova tarefa
+{
+    "titulo": "Reunião com o marketing",
+	"descricao": "reunião referente a publicação na revista",
+    "data_conclusao": "2024/05/27",
+    "responsavel": 3
+}
+- O atributo 'descricao' é o único que não é obrigatório
+- Todas as tarefas são criadas com os campos 'finalizado' = false , 'expirou' = false
+- O campo 'expirou' é um campo automático que se modifica quando a data de conclusão da tarefa é ultrapassada
+
+
+PUT /tarefa/:id : Atualiza as informações de uma determinada tarefa
+{
+    "titulo": "Reunião com o marketing",
+	"descricao": "reunião referente a publicação na revista",
+    "data_conclusao": "2024/05/27",
+    "finalizado": true
+}
+- Todos os atributos são opcionais
+- Não é possivel modificar o campo 'finalizado' ou o campo 'data_conclusao' após a tarefa ter expirado
+- Não é possível modificar o campo 'expirou'
+
+
+DELETE /tarefa/:id : Remove uma tarefa
+
+
+GET /tarefa/pendente/:idResponsavel : Lista todas as tarefas pendentes de um determinado responsável
