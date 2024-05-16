@@ -38,7 +38,7 @@ async function atualizar(idTarefa,dados){
 
     if(tarefaEncontrada){
         
-        if(dados.finalizado || dados.data_conclusao ){
+        if((dados.finalizado != null) || dados.data_conclusao ){
 
             if(tarefaEncontrada.expirou){
                 throw new Error("Não é possível finalizar ou modificar a data de uma tarefa que já expirou.")

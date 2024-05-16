@@ -4,7 +4,7 @@ function listarResponsavelSemPendencia(req,res){
     services.listarResponsavelSemPendencia()
         .then((listaResponsaveis) => {
             return res.status(200).send({
-                message: "Lista de responsaveis sem pendencias",
+                message: "Lista de responsáveis sem pendências",
                 responsaveis: listaResponsaveis
             }
         )
@@ -20,8 +20,8 @@ function listarTarefasDoResponsavel(req, res){
         .then((listaDeTarefas) => {
 
             return res.status(200).send({
-                message: "lista de tarefas",
-                id_usuario: req.params.id,
+                message: "Lista de tarefas",
+                id_responsavel: req.params.id,
                 tarefas: listaDeTarefas
             }
         )

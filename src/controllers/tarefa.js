@@ -18,10 +18,10 @@ function listarTarefasPendentesPorResponsavel(req,res){
 
 
 function listar(req, res){
-    services.listar(req.query)
+    services.listar()
         .then((listaDeTarefas) => {
             return res.status(200).send({
-                message: "tarefa criada com sucesso",
+                message: "Lista de tarefas",
                 tarefas: listaDeTarefas
             }
         )
@@ -36,12 +36,12 @@ function criar(req, res){
     services.criar(req.body)
         .then((tarefaCriada) => {
             return res.status(201).send({
-                message: "tarefa criada com sucesso",
+                message: "Tarefa criada com sucesso",
                 tarefa: tarefaCriada
             }
         )
     }, (error) => {
-        return res.status(500).send({ 
+        return res.status(400).send({ 
             message: error.message
         })
     })
@@ -51,7 +51,7 @@ function atualizar(req, res){
     services.atualizar(req.params.id,req.body)
         .then((tarefaAtualizada) => {
             return res.status(200).send({
-                message: "tarefa atualizada com sucesso",
+                message: "Tarefa atualizada com sucesso",
                 tarefa: tarefaAtualizada
             }
         )
@@ -66,7 +66,7 @@ function remover(req, res){
     services.remover(req.params.id)
         .then((tarefaRemovida) => {
             return res.status(200).send({
-                message: "tarefa removida com sucesso",
+                message: "Tarefa removida com sucesso",
                 tarefa: tarefaRemovida
             }
         )
