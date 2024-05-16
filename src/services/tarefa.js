@@ -2,7 +2,7 @@ const Responsavel = require("../models/responsavel")
 const Tarefa = require("../models/tarefa")
 const Sequelize = require("sequelize")
 
-
+//Retorna uma lista JSON de tarefas pendentes de determinado responsável
 async function listarTarefasPendentesPorResponsavel(idResponsavel){
     return await Tarefa.findAll({
         where: {
@@ -16,10 +16,13 @@ async function listarTarefasPendentesPorResponsavel(idResponsavel){
 } 
 
 //CRUD
+
+//Retorna uma lista JSON contendo todas as tarefas de todos os responsáveis
 async function listar(){
     return await Tarefa.findAll()
 }
 
+//Cria um novo registro de uma tarefa
 async function criar(dados){
 
     const responsavelEncontrado = await Responsavel.findByPk(dados.responsavel)
@@ -32,6 +35,7 @@ async function criar(dados){
     throw new Error("Não foi possível encontrar o Responsável")
 }
 
+//A partir do id de uma tarefa, realiza a atualização dos dados do mesma
 async function atualizar(idTarefa,dados){
 
     const tarefaEncontrada = await Tarefa.findByPk(idTarefa)
@@ -61,6 +65,7 @@ async function atualizar(idTarefa,dados){
     throw new Error("Tarefa não encontrada")
 }
 
+//A partir do id de uma tarefa, realiza a exclusão da mesma
 async function remover(idTarefa){
 
     const tarefa = await Tarefa.findByPk(idTarefa) 
