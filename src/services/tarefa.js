@@ -18,8 +18,19 @@ async function listarTarefasPendentesPorResponsavel(idResponsavel){
 //CRUD
 
 //Retorna uma lista JSON contendo todas as tarefas de todos os responsáveis
-async function listar(){
-    return await Tarefa.findAll()
+async function listar() {
+    const tarefasPendentes = await Tarefa.findAll({
+        include: [{
+            model: Responsavel
+        }]
+    });
+
+    return tarefasPendentes.map((tarefa) => {
+        const tarefaJson = tarefa.toJSON();
+        tarefaJson.responsavel = tarefaJson.responsavei.nome;
+        delete tarefaJson.responsavei;
+        return tarefaJson;
+    });
 }
 
 //Cria um novo registro de uma tarefa
