@@ -19,18 +19,7 @@ async function listarTarefasPendentesPorResponsavel(idResponsavel){
 
 //Retorna uma lista JSON contendo todas as tarefas de todos os responsáveis
 async function listar() {
-    const tarefasPendentes = await Tarefa.findAll({
-        include: [{
-            model: Responsavel
-        }]
-    });
-
-    return tarefasPendentes.map((tarefa) => {
-        const tarefaJson = tarefa.toJSON();
-        tarefaJson.responsavel = tarefaJson.responsavei.nome;
-        delete tarefaJson.responsavei;
-        return tarefaJson;
-    });
+    return Tarefa.findAll();
 }
 
 //Cria um novo registro de uma tarefa
@@ -56,18 +45,18 @@ async function atualizar(idTarefa,dados){
         if((dados.finalizado != null) || dados.data_conclusao ){
 
             if(tarefaEncontrada.expirou){
-                throw new Error("Não é possível finalizar ou modificar a data de uma tarefa que já expirou.")
+                throw new Error("Não é possível finalizar ou modificar uma tarefa que já expirou.")
                 
             }else{
-                //Somente modifica a data de conclusao e o campo finalizado caso a tarefa não tenha expirado
+                //Somente modifica a tarefa caso não tenha expirado
                 tarefaEncontrada.data_conclusao = dados.data_conclusao ?? tarefaEncontrada.data_conclusao
                 tarefaEncontrada.finalizado = dados.finalizado ?? tarefaEncontrada.finalizado
+                tarefaEncontrada.titulo = dados.titulo ?? tarefaEncontrada.titulo
+                tarefaEncontrada.descricao = dados.descricao ?? tarefaEncontrada.descricao
+                tarefaEncontrada.responsavel = dados.responsavel ?? tarefaEncontrada.responsavel
             }
-        }
-        //Permite modificar título e descrição mesmo que o prazo da tarefa já tenha expirado   
-        tarefaEncontrada.titulo = dados.titulo ?? tarefaEncontrada.titulo
-        tarefaEncontrada.descricao = dados.descricao ?? tarefaEncontrada.descricao
-
+        } 
+        
         await tarefaEncontrada.save()
         
         return tarefaEncontrada

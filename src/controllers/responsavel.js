@@ -52,7 +52,7 @@ function criar(req,res){
         .then((novoResponsavel) => {
             return res.status(201).send({
                 message: "Responsável criado com sucesso",
-                tarefa: novoResponsavel
+                responsavel: novoResponsavel
             }
         )
     }, (error) => {
@@ -67,7 +67,7 @@ function atualizar(req,res){
         .then((responsavelAtualizado) => {
             return res.status(200).send({
                 message: "Responsável atualizado com sucesso",
-                tarefa: responsavelAtualizado
+                responsavel: responsavelAtualizado
             }
         )
     }, (error) => {
@@ -82,7 +82,7 @@ function remover(req,res){
         .then((responsavelRemovido) => {
             return res.status(200).send({
                 message: "Responsável removido com sucesso",
-                tarefa: responsavelRemovido
+                responsavel: responsavelRemovido
             }
         )
     }, (error) => {
