@@ -51,4 +51,5 @@ Tarefa.addHook("beforeSave", (tarefa, options) => {
     }
 })
 
+
 module.exports = Tarefa

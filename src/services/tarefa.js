@@ -8,8 +8,7 @@ async function listarTarefasPendentesPorResponsavel(idResponsavel){
         where: {
             [Sequelize.Op.and]:[
                 {responsavel: parseInt(idResponsavel)},
-                {expirou: false},
-                {finalizado: false}
+                {finalizado: false},
             ]
         }
     })
