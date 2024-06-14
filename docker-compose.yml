@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: api-node:1.0
+    image: api-node_ads-labs:1.0
     container_name: api-ads-labs-container
     ports:
       - "3000:3000"
